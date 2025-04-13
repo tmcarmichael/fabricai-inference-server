@@ -6,7 +6,7 @@ A hackable, modular, containerized inference server for deploying large language
 
 ## Architecture
 
-See docs page.
+See [docs](https://github.com/tmcarmichael/fabricai-inference-server/blob/main/docs/architecture.md) page.
 
 ## Prerequisites
 
