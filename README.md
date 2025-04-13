@@ -1,5 +1,9 @@
 # FabricAI Inference Server
 
+[![Status](https://img.shields.io/badge/status-under_development-orange)](#)
+[![License](https://img.shields.io/github/license/tmcarmichael/fabricai-inference-server)](https://github.com/tmcarmichael/fabricai-inference-server/blob/main/LICENSE)
+![](https://img.shields.io/github/last-commit/tmcarmichael/fabricai-inference-server)
+
 A hackable, modular, containerized inference server for deploying large language models in local or hybrid environments.
 
 ---
