@@ -1,0 +1,22 @@
+services:
+  fabricai-inference-server:
+    build: .
+    container_name: fabricai-inference-server
+    env_file: .env
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=redis
+    volumes:
+      - ${LOCAL_MODEL_DIR}:/models:ro
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:7.0"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:

@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "fabricai-inference-server"
+version = "0.1.0"
+description = "A modular inference server component of the Fabric AI toolchain"
+license = "MIT"
+authors = [ "Thomas Carmichael <ThomasCarmichael@pm.me>" ]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.103.0"
+uvicorn = { version = "^0.22.0", extras = ["standard"] }
+llama-cpp-python = "^0.1.77"
+python-dotenv = "^1.1.0"
+python-socketio = "^5.13.0"
+redis = "^5.2.1"
+pydantic-settings = "^2.8.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+httpx = "^0.28.1"
+pytest-asyncio = "^0.26.0"
+pytest = "^8.3.5"
+
+[tool.black]
+line-length = 90
+target-version = ["py310"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
