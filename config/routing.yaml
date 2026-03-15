@@ -1,0 +1,51 @@
+# Routing configuration for the heuristic router.
+# These thresholds and keyword lists control how requests
+# are classified and routed between local and cloud backends.
+
+default_backend: ollama
+cloud_backend: anthropic
+
+# Token count thresholds (estimated, not exact)
+trivial_max_tokens: 50
+long_context_min_tokens: 4000
+
+# Conversation depth before preferring cloud
+deep_conversation_turns: 10
+
+# Keywords that suggest the task needs a stronger model
+cloud_keywords:
+  - refactor
+  - review
+  - debug
+  - analyze
+  - explain
+  - compare
+  - evaluate
+  - architect
+  - optimize
+  - critique
+
+# Keywords that suggest a local model can handle it
+local_keywords:
+  - summarize
+  - extract
+  - reformat
+  - translate
+  - classify
+  - list
+  - convert
+  - format
+  - count
+  - sort
+
+# Prompt analysis — deeper signals beyond keyword matching.
+# Instruction complexity: multi-step tasks, multiple imperative verbs.
+# Reference density: heavy back-references to prior conversation context.
+complexity_cloud_threshold: 0.5
+reference_density_cloud_threshold: 0.5
+
+# Cascade fallback — try local, score quality, escalate if bad.
+# Only triggers for non-streaming requests with low routing confidence.
+cascade_enabled: true
+cascade_confidence_threshold: 0.7
+cascade_quality_threshold: 0.6
