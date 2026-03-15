@@ -9,4 +9,4 @@ if [ -f .env ]; then
 fi
 
 # Start uvicorn
-poetry run uvicorn fabricai_inference_server.server:app --host 0.0.0.0 --port 8000
+PYTHON_GIL=0 uv run uvicorn fabricai_inference_server.app:app --host 0.0.0.0 --port 8000 --reload
