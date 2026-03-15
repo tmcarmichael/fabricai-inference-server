@@ -1,27 +1,31 @@
 """
-exceptions.py
-
-A list of app-specific exceptions with description.
+Custom exception types.
 """
 
 
-class QueueFullException(Exception):
-    """
-    Raised when the request queue is at maximum capacity.
-    """
-
-    def __init__(
-        self, message: str = "Request queue is full. Too many requests in progress."
-    ):
-        super().__init__(message)
-        self.message = message
+class QueueFullError(Exception):
+    def __init__(self):
+        self.message = "Request queue is full. Too many requests in progress."
+        super().__init__(self.message)
 
 
-class ModelNotFoundException(Exception):
-    """
-    Raised when the specified model is missing or can't be loaded.
-    """
+class ModelNotFoundError(Exception):
+    def __init__(self, detail: str = "Model not found"):
+        self.message = detail
+        super().__init__(self.message)
 
-    def __init__(self, message: str = "Model file not found"):
-        super().__init__(message)
-        self.message = message
+
+class BackendUnavailableError(Exception):
+    def __init__(self, backend: str, detail: str = ""):
+        self.message = f"Backend '{backend}' is unavailable"
+        if detail:
+            self.message += f": {detail}"
+        super().__init__(self.message)
+
+
+class BackendError(Exception):
+    def __init__(self, backend: str, detail: str = ""):
+        self.message = f"Backend '{backend}' error"
+        if detail:
+            self.message += f": {detail}"
+        super().__init__(self.message)
