@@ -1,31 +1,40 @@
-[tool.poetry]
+[project]
 name = "fabricai-inference-server"
-version = "0.1.0"
-description = "A modular inference server component of the Fabric AI toolchain"
-license = "MIT"
-authors = [ "Thomas Carmichael <ThomasCarmichael@pm.me>" ]
+version = "0.3.0"
+description = "An intelligent local/cloud hybrid LLM routing gateway with OpenAI-compatible API"
+license = {text = "MIT"}
+authors = [{name = "Thomas Carmichael", email = "ThomasCarmichael@pm.me"}]
 readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.34.0",
+    "httpx>=0.28.0",
+    "pydantic-settings>=2.8.0",
+    "redis>=5.2.0",
+    # Cloud providers
+    "anthropic>=0.52.0",
+    "openai>=1.75.0",
+    "google-genai>=1.14.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-fastapi = "^0.103.0"
-uvicorn = { version = "^0.22.0", extras = ["standard"] }
-llama-cpp-python = "^0.1.77"
-python-dotenv = "^1.1.0"
-python-socketio = "^5.13.0"
-redis = "^5.2.1"
-pydantic-settings = "^2.8.1"
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.26.0",
+    "ruff>=0.11.0",
+]
 
-[tool.poetry.group.dev.dependencies]
-black = "^25.1.0"
-httpx = "^0.28.1"
-pytest-asyncio = "^0.26.0"
-pytest = "^8.3.5"
-
-[tool.black]
+[tool.ruff]
 line-length = 90
-target-version = ["py310"]
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
