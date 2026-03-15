@@ -5,7 +5,7 @@ Learns from cascade outcomes to self-tune routing confidence per
 heuristic rule. Uses an exponential moving average so the system
 adapts to changing usage patterns without explicit retraining.
 
-No ML, no training pipeline, no cold start — just statistics.
+No ML, no training pipeline, no cold start, just statistics.
 """
 
 from __future__ import annotations
@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 # Minimum observations before we trust the adaptive signal
 _MIN_SAMPLES = 10
 
-# EMA smoothing factor — higher = adapts faster, noisier
+# EMA smoothing factor. Higher = adapts faster, noisier
 _ALPHA = 0.1
 
 

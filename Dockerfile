@@ -1,22 +1,18 @@
-FROM python:3.11-slim-bullseye
+FROM python:3.14-slim-bookworm
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    cmake \
-    && rm -rf /var/lib/apt/lists/*
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
+# Copy dependency files and install
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev
 
-COPY pyproject.toml poetry.lock /app/
-
-RUN pip install --no-cache-dir --upgrade pip
-RUN pip install --no-cache-dir poetry
-RUN poetry --version
-RUN poetry install --no-root --no-interaction --no-ansi
-
-COPY . /app
+# Copy application code
+COPY fabricai_inference_server/ fabricai_inference_server/
 
 EXPOSE 8000
 
-CMD ["poetry", "run", "uvicorn", "fabricai_inference_server.server:socketio_app", "--host", "0.0.0.0", "--port", "8000"]
+ENV PYTHON_GIL=0
+CMD ["uv", "run", "uvicorn", "fabricai_inference_server.app:app", "--host", "0.0.0.0", "--port", "8000"]

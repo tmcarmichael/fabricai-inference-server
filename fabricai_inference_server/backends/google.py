@@ -1,5 +1,5 @@
 """
-Google backend — Gemini models via the GenAI SDK.
+Google backend: Gemini models via the GenAI SDK.
 
 Translates between OpenAI chat format and Google's content/parts
 structure. Key differences: "assistant" role → "model",

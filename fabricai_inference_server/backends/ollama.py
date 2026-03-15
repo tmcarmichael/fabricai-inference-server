@@ -1,5 +1,5 @@
 """
-Ollama backend — proxies to Ollama's OpenAI-compatible API.
+Ollama backend: proxies to Ollama's OpenAI-compatible API.
 
 Ollama runs locally and handles model management, chat templates,
 Metal/CUDA acceleration. We talk to it via its /v1/ endpoints.

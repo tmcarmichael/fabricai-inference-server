@@ -1,5 +1,5 @@
 """
-Cascade fallback layer — try local, score quality, escalate if needed.
+Cascade fallback layer: try local, score quality, escalate if needed.
 
 This is the most expensive routing path (pays for both local and cloud
 inference when escalating) but provides a safety net for ambiguous

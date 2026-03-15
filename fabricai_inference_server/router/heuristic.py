@@ -1,5 +1,5 @@
 """
-Heuristic router — rule-based routing with deep prompt analysis.
+Heuristic router: rule-based routing with deep prompt analysis.
 
 Applies rules in priority order. First match wins. Rules use token
 counting, code detection, keyword matching, instruction complexity,
@@ -170,7 +170,7 @@ class HeuristicRouter:
 
         # --- Fast-path rules (cheapest checks first) ---
 
-        # Rule 1: Trivial query — short, no code
+        # Rule 1: Trivial query, short, no code
         if token_count < cfg.trivial_max_tokens and not code_present:
             return self._decide(
                 "local",
@@ -179,7 +179,7 @@ class HeuristicRouter:
                 0.95,
             )
 
-        # Rule 2: Long context — needs a strong model
+        # Rule 2: Long context. Needs a strong model
         if token_count > cfg.long_context_min_tokens:
             return self._decide(
                 "cloud",
@@ -188,7 +188,7 @@ class HeuristicRouter:
                 0.90,
             )
 
-        # Rule 3: Code + action keyword — needs reasoning
+        # Rule 3: Code + action keyword. Needs reasoning
         if code_present and has_any_keyword(
             user_content, cfg.cloud_keywords
         ):
@@ -199,7 +199,7 @@ class HeuristicRouter:
                 0.90,
             )
 
-        # Rule 4: Simple task keyword — local handles fine
+        # Rule 4: Simple task keyword, local handles fine
         if has_any_keyword(user_content, cfg.local_keywords):
             return self._decide(
                 "local",
@@ -208,7 +208,7 @@ class HeuristicRouter:
                 0.85,
             )
 
-        # Rule 5: Code without action keyword — local can try
+        # Rule 5: Code without action keyword, local can try
         if code_present:
             return self._decide(
                 "local",
@@ -235,7 +235,7 @@ class HeuristicRouter:
             return self._decide(
                 "cloud",
                 "weak_domain",
-                f"Domain '{domain}' — local models underperform",
+                f"Domain '{domain}', local models underperform",
                 0.85,
             )
 
@@ -249,7 +249,7 @@ class HeuristicRouter:
                 0.80,
             )
 
-        # Rule 9: Deep conversation — cloud for coherence
+        # Rule 9: Deep conversation, cloud for coherence
         if message_count > cfg.deep_conversation_turns:
             return self._decide(
                 "cloud",
@@ -258,7 +258,7 @@ class HeuristicRouter:
                 0.85,
             )
 
-        # Default: low confidence — cascade eligible
+        # Default: low confidence, cascade eligible
         return self._decide(
             "local",
             "default",

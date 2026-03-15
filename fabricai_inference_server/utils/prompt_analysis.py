@@ -181,7 +181,7 @@ def _back_ref_pattern() -> re.Pattern:
 
 
 def measure_reference_density(text: str) -> float:
-    """Score 0.0-1.0 — how heavily does text reference prior context?
+    """Score 0.0-1.0. How heavily does text reference prior context?
 
     High density → needs strong context window, favor cloud.
     """

@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     redis_host: str = Field("localhost", alias="REDIS_HOST")
     redis_port: int = Field(6379, alias="REDIS_PORT")
 
-    # Cloud providers (optional — backend activates when key is set)
+    # Cloud providers (optional, backend activates when key is set)
     anthropic_api_key: str | None = Field(
         None, alias="ANTHROPIC_API_KEY"
     )

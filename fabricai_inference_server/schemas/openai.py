@@ -2,7 +2,7 @@
 OpenAI-compatible request and response models for the Chat Completions API.
 
 These schemas allow any OpenAI SDK client to use our gateway as a drop-in
-replacement. Fields match the OpenAI specification — we pass through what
+replacement. Fields match the OpenAI specification. We pass through what
 we don't handle so backends that support extra features still work.
 """
 

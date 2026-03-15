@@ -83,7 +83,7 @@ class SessionManager:
     ) -> str:
         """Atomically pin a session to a backend. Returns the pinned value.
 
-        Uses HSETNX so the first request to pin wins — concurrent
+        Uses HSETNX so the first request to pin wins. Concurrent
         requests for the same session all see the same backend.
         """
         meta_key = f"session_meta:{session_id}"
@@ -92,7 +92,7 @@ class SessionManager:
         )
         if was_set:
             return model
-        # Another request pinned first — return their value
+        # Another request pinned first, return their value
         return await self.client.hget(meta_key, "pinned_model") or model
 
     async def get_pinned_model(self, session_id: str) -> str | None:

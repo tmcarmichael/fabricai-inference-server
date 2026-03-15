@@ -141,7 +141,7 @@ async def lifespan(app: FastAPI):
     app.state.capacity = asyncio.Semaphore(total_capacity)
 
     logger.info(
-        "Server ready — backends: %s, auth: %s, rate_limit: %d rpm",
+        "Server ready. Backends: %s, auth: %s, rate_limit: %d rpm",
         list(backends.keys()),
         "enabled" if settings.auth_enabled else "disabled",
         settings.rate_limit_rpm,
@@ -169,7 +169,7 @@ def create_app() -> FastAPI:
 
     # --- Middleware (applied in reverse order) ---
 
-    # Request ID (outermost — runs first)
+    # Request ID (outermost, runs first)
     app.add_middleware(RequestIDMiddleware)
 
     # Rate limiting
@@ -178,7 +178,7 @@ def create_app() -> FastAPI:
         requests_per_minute=settings.rate_limit_rpm,
     )
 
-    # Auth (innermost — runs after rate limiting)
+    # Auth (innermost, runs after rate limiting)
     if settings.auth_enabled:
         api_keys = settings.api_key_set
         if not api_keys:

@@ -63,7 +63,7 @@ class QualityScorer:
             value -= 0.5
             penalties.append("very_short_response")
 
-        # 2. Repetition — low unique word ratio
+        # 2. Repetition: low unique word ratio
         words = stripped.lower().split()
         if len(words) > 5:
             unique_ratio = len(set(words)) / len(words)

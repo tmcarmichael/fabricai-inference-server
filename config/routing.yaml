@@ -38,13 +38,13 @@ local_keywords:
   - count
   - sort
 
-# Prompt analysis — deeper signals beyond keyword matching.
+# Prompt analysis: deeper signals beyond keyword matching.
 # Instruction complexity: multi-step tasks, multiple imperative verbs.
 # Reference density: heavy back-references to prior conversation context.
 complexity_cloud_threshold: 0.5
 reference_density_cloud_threshold: 0.5
 
-# Cascade fallback — try local, score quality, escalate if bad.
+# Cascade fallback: try local, score quality, escalate if bad.
 # Only triggers for non-streaming requests with low routing confidence.
 cascade_enabled: true
 cascade_confidence_threshold: 0.7

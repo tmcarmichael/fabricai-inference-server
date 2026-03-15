@@ -2,7 +2,7 @@
 Per-model cost estimation.
 
 Prices in USD per 1K tokens. Local models are free.
-These are approximate — update as pricing changes.
+These are approximate. Update as pricing changes.
 """
 
 # (input_cost_per_1k, output_cost_per_1k)

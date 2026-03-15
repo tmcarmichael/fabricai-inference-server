@@ -1,5 +1,5 @@
 """
-Anthropic backend — Claude models via the Messages API.
+Anthropic backend: Claude models via the Messages API.
 
 Translates between OpenAI chat format and Anthropic's Messages API.
 Key differences: system message is a top-level param, content uses

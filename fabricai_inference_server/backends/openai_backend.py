@@ -1,5 +1,5 @@
 """
-OpenAI backend — GPT models via the Chat Completions API.
+OpenAI backend: GPT models via the Chat Completions API.
 
 Near-passthrough since our schema matches OpenAI's format.
 We still normalize SDK response objects to our Pydantic models

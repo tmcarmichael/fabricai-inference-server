@@ -1,5 +1,5 @@
 """
-API routes — OpenAI-compatible chat completions endpoint.
+API routes: OpenAI-compatible chat completions endpoint.
 
 Thin route handlers that delegate to backends. The server owns
 concurrency control, routing dispatch, cost tracking, and
@@ -104,7 +104,7 @@ async def _resolve_routing(
         else:
             raise HTTPException(503, detail="No backends available")
 
-    # Atomically pin session — first request wins the race
+    # Atomically pin session. First request wins the race
     if session_id:
         session_mgr = request.app.state.session_manager
         pinned_to = await session_mgr.pin_model_if_unset(
@@ -286,7 +286,7 @@ async def chat_completions(
 async def route_preview(
     chat_request: ChatCompletionRequest, request: Request
 ):
-    """Dry-run routing — returns the routing decision without running inference."""
+    """Dry-run routing. Returns the routing decision without running inference."""
     _, decision = await _resolve_routing(request, chat_request)
     return decision.to_dict()
 

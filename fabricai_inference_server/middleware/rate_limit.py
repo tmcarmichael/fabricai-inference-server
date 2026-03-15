@@ -2,10 +2,10 @@
 Rate limiting middleware.
 
 Sliding window counter per API key (or per IP if no auth).
-Uses a deque with left-pruning — O(1) amortized per request
+Uses a deque with left-pruning, O(1) amortized per request
 instead of O(n) list comprehension rebuild.
 
-In-memory — suitable for single-worker deployments.
+In-memory, suitable for single-worker deployments.
 """
 
 from __future__ import annotations
@@ -25,7 +25,7 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         self._windows: dict[str, deque[float]] = {}
 
     def _get_key(self, request: Request) -> str:
-        """Identify the client — API key if present, else IP."""
+        """Identify the client: API key if present, else IP."""
         auth = request.headers.get("authorization", "")
         if auth.startswith("Bearer "):
             return f"key:{auth[7:].strip()}"
@@ -46,7 +46,7 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
             window = deque()
             self._windows[key] = window
 
-        # Prune expired entries from the left — O(expired) amortized
+        # Prune expired entries from the left, O(expired) amortized
         while window and window[0] < cutoff:
             window.popleft()
 

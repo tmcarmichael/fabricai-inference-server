@@ -2,7 +2,7 @@
 Lightweight telemetry collector.
 
 Stores recent request events in a bounded deque for the dashboard
-and summary endpoint. Non-blocking — callers fire-and-forget.
+and summary endpoint. Non-blocking, callers fire-and-forget.
 """
 
 from __future__ import annotations
